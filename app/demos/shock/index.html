@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>shock demo</title>
+</head>
+<body>
+	<script type="text/javascript">
+		if (navigator.vibrate) {
+		    navigator.vibrate(2000);
+		} else if (navigator.webkitVibrate) {
+		    navigator.webkitVibrate(2000);
+		}else{
+			alert('not suport');
+		}
+	</script>
+</body>
+</html>

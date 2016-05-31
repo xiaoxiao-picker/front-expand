@@ -1,0 +1,416 @@
+@charset "utf-8";
+
+/* CSS Document */
+@import url(http://fonts.useso.com/css?family=Pathway+Gothic+One);
+
+*{
+      box-sizing: border-box;
+}
+a {
+    color: #ccd500;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    color: #a9b119;
+}
+.clear {
+    clear: both;
+}
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    background-color: #589ad4;
+}
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 80px;
+    width: 100%;
+    background: black;
+}
+b {
+    font-weight: 600;
+}
+.htmldemo p {
+    font-size: 16px;
+    font-family: "微软雅黑"
+}
+
+/* Titulos
+-------------------------------------------------------------------------*/
+h1 {
+    width: 100%;
+    color: #000000;
+    font-size: 40px;
+    margin-bottom: 25px;
+}
+h2 {
+    color: #000000;
+    display: table-cell;
+    float: left;
+    font-size: 45px;
+    line-height: 40px;
+    margin: 0 0 50px;
+    text-align: center;
+    width: 100%;
+    font-weight: 300;
+}
+h2 span {
+    font-weight: 400;
+}
+h3 {
+    float: left;
+    width: 100%;
+    margin: 0 0 20px 0;
+    color: white;
+    font-size: 40px;
+    font-family: 'Lato', 'sans-serif';
+    font-weight: 300;
+}
+h4 {
+    color: #ffffff;
+    display: table-cell;
+    float: left;
+    font-size: 35px;
+    line-height: 31px;
+    margin: 0 0 0;
+    text-align: center;
+    width: 100%;
+    font-weight: 400;
+}
+p.title {
+    color: #000000;
+    display: table-cell;
+    float: left;
+    font-size: 45px;
+    line-height: 40px;
+    margin: 0 0 50px;
+    text-align: center;
+    width: 100%;
+    font-weight: 300;
+}
+.grey {
+    color: #444;
+}
+
+/* INICIO
+-------------------------------------------------------------------------*/
+#header {
+    margin: 0 auto 0;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    background-color: #6C5726;
+    overflow: hidden;
+    position: relative;
+    padding: 50px 0px;
+    border-top: 10px solid #A48E4E;
+    border-bottom: 10px solid #A48E4E;
+}
+#header table, #footer table {
+    height: 100%;
+    width: 100%;
+}
+#header table td, #footer table td {
+    vertical-align: middle;
+}
+#header .content {
+    color: #FFFFFF;
+    float: left;
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 42px;
+    margin-top: 30px;
+    text-align: center;
+    width: 100%;
+}
+#header .content, #footer .content {
+    font-family: 'Pathway Gothic One';
+    color: #ffffff;
+    float: left;
+    font-size: 70px;
+    font-weight: 300;
+    line-height: 80px;
+    margin-top: 2px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+    padding: 30px 0px;
+}
+#header .content > div, #footer .content > div {
+    display: inline-block;
+}
+#footer {
+    width: 100%;
+    background-color: #6C5726;
+    border-top: 20px dotted #A48E4E;
+    height: 200px;
+}
+.line {
+    background-color: #589ad4;
+    padding: 30px 0px 25px 0px;
+    width: 100%;
+    /*border-top: 20px solid #A8D0F5;*/
+    background-image:url('./../images/bg1.png'); 
+}
+.machineContainer {
+    background-color: #000;
+    padding: 5px 1px 5px 1px;
+    overflow: hidden;
+    height: 135px;
+}
+.slotMachine {
+    width: 27%;
+    height: 150px;
+    padding: 0px;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;    /*margin: 0px 5px;*/
+
+    /*border: 5px solid #000;*/
+    margin-top: -42px;
+    margin-left: -7px;
+}
+.machineResult {
+    color: #fff;
+    text-align: center;
+    font-weight: 900;
+}
+.noBorder {
+    border: none !important;
+    background: transparent !important;
+}
+.slotMachine .slot {
+    height: 180px;
+    background-position-x: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-y: -20px;
+}
+.slotMachine .slot img {
+    width: 100px;
+    height: 100px;
+}
+.slot0 {
+    background-image: url("../images/number/0.png");
+}
+.slot1 {
+    background-image: url("../images/number/1.png");
+}
+.slot2 {
+    background-image: url("../images/number/2.png");
+}
+.slot3 {
+    background-image: url("../images/number/3.png");
+}
+.slot4 {
+    background-image: url("../images/number/4.png");
+}
+.slot5 {
+    background-image: url("../images/number/5.png");
+}
+.slot6 {
+    background-image: url("../images/number/6.png");
+}
+.slot7 {
+    background-image: url("../images/number/7.png");
+}
+.slot8 {
+    background-image: url("../images/number/8.png");
+}
+.slot9 {
+    background-image: url("../images/number/9.png");
+}
+#textMachine, #textMachine2 {
+    width: 520px;
+    height: 67px;
+    overflow: hidden;
+    display: inline-block;
+    text-align: left;
+}
+#textMachine > *, #textMachine2 > * {
+    padding: 0px 0px;
+}
+.slotMachineButton {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+}
+.slotMachineButton {
+    -moz-box-shadow: inset 0px 1px 0px 0px #fce2c1;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #fce2c1;
+    box-shadow: inset 0px 1px 0px 0px #fce2c1;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffc477), color-stop(1, #fb9e25));
+    background: -moz-linear-gradient(center top, #ffc477 5%, #fb9e25 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#fb9e25');
+    background-color: #ffc477;
+    border-radius: 75px;
+    text-indent: 0px;
+    border: 6px solid #eeb44f;
+    display: inline-block;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    font-style: normal;
+    height: 100px;
+    line-height: 90px;
+    margin-top: 10px;
+    width: 100px;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 0px #cc9f52;
+    cursor: pointer;
+}
+.slotMachineButton:hover {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477));
+    background: -moz-linear-gradient(center top, #fb9e25 5%, #ffc477 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fb9e25', endColorstr='#ffc477');
+    background-color: #fb9e25;
+}
+.slotMachineButton:active {
+    position: relative;
+    top: 1px;
+}
+.line {
+    width: 600px;
+    height: 830px;
+    margin: auto;
+    z-index: -1;
+}
+.content {
+    width: 540px;
+    text-align: center;
+    background: url('../images/frame.png') no-repeat 50% 58px;
+    height: 450px;
+    background-size: 98%;
+    margin: 0 auto;
+}
+.target {
+    clear: both;
+    padding-top: 225px;
+    width: 335px;
+    margin: 0 auto;
+}
+.spanYear {
+    margin: 0;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: cursive;
+    color: #589ad4;
+    line-height: 60px;
+}
+#title-img {
+    width: 540px;
+}
+.yearContent {
+    width: 540px;
+    /*height: 250px;*/
+    margin: auto;
+    margin-top: 80px;
+    background-color: rgba(255,255,255,.7);
+    border-radius: 30px;
+    border: 4px solid #f4c71d;
+    padding: 0 20px 20px;
+}
+#pTitle {
+    padding: 0;
+    margin: 0;
+    margin-left: 20px;
+    width: 500px;
+    height: 40px;
+    float: left;
+    text-align: left;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 40px;
+    font-family: @微软雅黑;
+}
+#pContent {
+    padding: 0;
+    margin: auto;
+    /*width: 540px;*/
+    border: 0;
+    border: none;
+    background-color: #fff;
+    box-shadow: 3px 3px 2px rgba(0,0,0,.3);
+    padding: 20px 10px;
+    border-radius: 30px;
+}
+#spanContent {
+    height: auto;
+    font-size: 30px;
+    text-align: left;
+    line-height: 35px;
+    margin-top: 5px;
+}
+#imgContent {
+    width: 300px;
+    height: 160px;
+    border: none;
+    display: block;
+    margin: auto;
+}
+.tail {
+    width: 600px;
+    margin: auto;
+}
+.tail p {
+    width: 250px;
+    /*height: 20px;*/
+    margin-left: 30px;
+    margin-top: 10px;
+    padding: 0;
+    float: left;
+    text-align: left;
+    font-size: 30px;
+}
+
+/*     #shadow
+ {
+         width:600px;
+         height:880px;
+         background-color:#7c7c7c;
+         margin:auto;
+         z-index:1;
+         position:relative;
+         top:-800px;
+         opacity:0.7;
+         visibility:hidden;
+     }
+    
+    #twoBtn
+ {
+         width:600px;
+         height:880px;
+         margin:auto;
+         z-index:2;
+         position:relative;
+         top:-1600px;
+         visibility:hidden;
+         
+     } 
+     .again
+     {
+             width:60px;
+             height:40px;
+             float:left;
+             margin-top:300px;
+             margin-left:200px;
+          }
+         
+     .share
+     {
+             width:60px;
+             height:40px;
+             float:left;
+              margin-top:300px;
+             margin-left:20px;
+              opacity:1;
+         }*/

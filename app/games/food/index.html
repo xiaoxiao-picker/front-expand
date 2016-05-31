@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0, minimum-scale=1, maximum-scale=1, user-scalable=no, target-densitydpi=device-dpi;" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="full-screen" content="true"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <meta name="360-fullscreen" content="true"/>
+    <title>旦苑的吃货</title>
+    <script src="./bower_components/easeljs/lib/easeljs-0.8.0.min.js"></script>
+    <script src="./bower_components/preloadjs/dist/preloadjs-0.6.0.min.js"></script>
+</head>
+
+<!--
+
+吐槽:
+这破玩意儿用的大概是createjs
+这坑爹玩意儿大概做了3天，但是团委**让我改来改去花了至少一个多星期，真是日了狗了。。。
+
+欢迎来找我玩, github.com/voidrank
+
+顺便求份前端兼职工作.....
+
+                ---- 2015-5-22
+
+ -->
+
+<body style="margin: 0px 0px 0px 0px;">
+<canvas id="gameStage" style="margin: 0px 0px 0px 0px; position: absolute"></canvas>
+<script>
+
+    // screen adapt
+    var canvas = document.getElementById("gameStage");
+    var designWidth = 750;
+    var designHeight = 1270;
+
+
+    // view area
+    var viewWidth = document.documentElement.clientWidth < 750 ? document.documentElement.clientWidth : 750;
+    var viewHeight = document.documentElement.clientHeight;
+    console.log(viewWidth, viewHeight);
+
+    var scale = viewWidth / designWidth;
+
+    canvas.width = viewWidth / scale;
+    canvas.height = viewHeight / scale;
+    canvas.style.width = viewWidth + "px";
+    canvas.style.height = viewHeight + "px";
+
+    // game
+    var stage = new createjs.Stage(canvas);
+    createjs.Touch.enable(stage);
+
+    // time
+    var timeTotal = 0;
+    var startTime = 0;
+
+
+    // pre
+    goToPre = function() {
+
+        stage.removeAllChildren();
+        stage.addChild(preBackground);
+        stage.addChild(enterButton);
+        stage.addChild(gameName);
+        stage.addChild(introductionDisplay);
+        stage.addChild(licenseDisplay);
+
+        state = "pre";
+    };
+
+
+    // init
+    goToMenu = function() {
+
+        stage.removeAllChildren();
+        stage.addChild(playingBackground);
+        stage.addChild(menuBackground);
+        stage.addChild(startButton);
+        stage.addChild(gameInstruction);
+
+        state = "menu";
+    };
+
+
+    goToPlay = function() {
+
+        totalPoint = 0;
+        timeTotal = 0;
+        startTime = (new Date()).getTime();
+        refreshPointDisplay();
+        refreshTime();
+
+        stage.removeAllChildren();
+
+        stage.addChild(playingBackground);
+        // stage.addChild(suspendButton);
+        stage.addChild(timeDisplay);
+        stage.addChild(totalPointDisplay);
+
+        state = "playing";
+    };
+
+
+    goToSuspend = function() {
+
+        for (var i = 0; i < stage.children.length; ++i) {
+
+            // remove suspend button
+            if (stage.children[i].name === "suspend") {
+                stage.removeChildAt(i);
+                --i;
+            }
+
+            // disable click listener to prevent user get
+            // points when suspending
+            else if ("name" in stage.children[i] && stage.children[i].name === "food") {
+                stage.children[i].disableClick();
+            }
+        }
+
+        stage.addChild(continueButton);
+        stage.addChild(menuBackground);
+        stage.addChild();
+        stage.addChild(introductionDisplay);
+
+        state = "suspend";
+    };
+
+
+    goToContinue = function() {
+
+        for (var i = 0; i < stage.children.length; ++i) {
+
+            // remove continue button
+            if ("name" in stage.children[i]&& (stage.children[i].name === "continue" || stage.children[i].name === "instruction" || stage.children[i].name === "menu-background")) {
+                console.log(stage.children[i]);
+                stage.removeChildAt(i);
+                --i;
+            }
+
+            // enable click listener to continue
+            else if ("name" in stage.children[i] && stage.children[i].name === "food"){
+                stage.children[i].enableClick();
+            }
+        }
+
+        stage.addChild(suspendButton);
+
+        state = "playing";
+    };
+
+
+    goToFinish = function(totalScore) {
+        state = "finish";
+        stage.removeAllChildren();
+        stage.addChild(finishBackground);
+        stage.addChild(shareText);
+        /*
+        var level;
+        if (totalScore >= 120)
+            level = "A";
+        else if (totalScore >= 110)
+            level = "A-";
+        else if (totalScore >= 100)
+            level = "B+";
+        else if (totalScore >= 90)
+            level = "B";
+        else if (totalScore >= 80)
+            level = "B-";
+        else if (totalScore >= 70)
+            level = "C+";
+        else if (totalScore >= 60)
+            level = "C";
+        else if (totalScore >= 50)
+            level = "C-"
+        else if (totalScore >= 40)
+            level = "D"
+        else
+            level = "F"
+        */
+        var scoreDisplay = new createjs.Text("课程编号      成绩\n NO.1             " + totalScore, "bold 70px comic sans", "#000000");
+        scoreDisplay.x = 100;
+        scoreDisplay.y = 450;
+        stage.addChild(scoreDisplay);
+        stage.addChild(resumeButton);
+
+        gameover_callback();
+    };
+
+    // state:
+    //      menu
+    //      playing
+    //      suspend
+    //      finish
+    var state = "pre";
+
+
+    // background
+    var preBackground = new createjs.Bitmap("./pre-background.png");
+    preBackground.name = "pre-background";
+
+    var playingBackground = new createjs.Bitmap("./playing-background.png");
+    playingBackground.name = "playing-background";
+
+    var menuBackground = new createjs.Bitmap("./menu-background.jpg");
+    menuBackground.name = "menu-background";
+
+    var finishBackground = new createjs.Bitmap("./finish-background.png");
+    finishBackground.name = "finishBackground";
+    finishBackground.y = -50;
+
+
+    // text
+    var gameName = new createjs.Text("旦苑的吃货", "bold 70px comic sans", "#ffffff");
+    gameName.x = 100;
+    gameName.y = 150;
+    gameName.regX = -100;
+    gameName.textBaseline = "alphabetic";
+
+    var gameInstruction = new createjs.Text(
+            "30s内点击屏幕中的旦苑食物\n获得相应分数：\n\n" +
+            "油炸芒果获得5分；大块肉获得2分；\n" +
+            "         大排获得3分；辣椒倒扣2分  \n",
+            "40px comic sans", "#ffffff");
+    gameInstruction.x = 50;
+    gameInstruction.y = 350;
+    gameInstruction.lineHeight = 50;
+
+    var timeDisplay = new createjs.Text("test", "bold 70px comic sans", "#e2ff12");
+    timeDisplay.x = 50;
+    timeDisplay.y = 885;
+
+    var shareText = new createjs.Text(
+            "来旦苑刷出你的分数,\n" +
+            "截朋友圈成绩分享画面，\n发至团团在复旦\n(微信公众号fudangongqingtuan)\n" +
+            "得分前十名将获得精美校庆礼品哦~\n" +
+            "欢迎关注复旦学生网机器人\n" +
+            "微信公众号: STUrobot",
+            "20px comic snas",
+            "#000000"
+    );
+    shareText.x = 100;
+    shareText.y = 780;
+    shareText.lineHeight = 30;
+
+    var introductionDisplay = new createjs.Text(
+        "说到复旦学子的“吃”，不得不提及本\n" +
+        "食旦苑.\n" +
+        "旦苑紧邻光华楼，是我旦学子最为熟\n" +
+        "熟悉和喜爱的食堂之一.WIFI全覆盖,\n" +
+        "神菜满地走,大众盖浇清真圆桌菜，总\n" +
+        "总有一款适合你!校庆当前,旦旦学子\n" +
+        "纷纷表示必须点一百一十两油炸芒果\n" +
+        "以庆祝.\n" +
+        "想体验在食堂吃饭的愉悦吗？快进入\n" +
+        "游戏填饱肚子吧!"
+            , "40px comic sans", "#eeeeee");
+    introductionDisplay.y = 200;
+    introductionDisplay.x = 50;
+    introductionDisplay.name = "introduction";
+    introductionDisplay.lineHeight = 60;
+
+    var licenseDisplay = new createjs.Text(
+            "                    共青团复旦大学委员会出品\n" +
+            "技术支持: 复旦大学学生网(github.com/STU-Fudan)",
+            "20px comic sans", "#eeeeee"
+    )
+    licenseDisplay.x = 150;
+    licenseDisplay.y = 950;
+    licenseDisplay.lineHeight = 30;
+
+    var totalPoint = 0;
+    var totalPointDisplay = new createjs.Text("总得分: 0", "bold 50px comic sans", "#eeeeee");
+    totalPointDisplay.x = 500;
+    totalPointDisplay.y = 900;
+    stage.addChild(totalPointDisplay);
+
+
+
+    // button
+    var enterButton = new createjs.Bitmap("./enter.jpg");
+    enterButton.x = 80;
+    enterButton.y = 780;
+    enterButton.addEventListener("mousedown", function() {
+        goToMenu();
+    });
+
+    var startButton = new createjs.Bitmap("./start.jpg");
+    startButton.x = 170;
+    startButton.y = 750;
+    startButton.addEventListener('mousedown', function () {
+        goToPlay();
+    });
+
+    var suspendButton = new createjs.Bitmap("./suspend.jpg");
+    suspendButton.name = "suspend";
+    suspendButton.x = 50;
+    suspendButton.y = 80;
+    suspendButton.regX = 50;
+    suspendButton.regY = 50;
+    suspendButton.addEventListener('mousedown', function() {
+        goToSuspend();
+    });
+
+    var continueButton = new createjs.Bitmap("./start.jpg");
+    continueButton.name = "continue";
+    continueButton.x = 100;
+    continueButton.y = 80;
+    continueButton.regX = -100;
+    continueButton.regY = -1000;
+    continueButton.addEventListener('mousedown', function() {
+        goToContinue();
+    });
+
+    var resumeButton = new createjs.Bitmap("./resume.jpg");
+    resumeButton.name = "continue";
+    resumeButton.x = 100;
+    resumeButton.y = 620;
+    resumeButton.addEventListener("mousedown", function() {
+        goToMenu();
+    });
+
+    var shareButton = new createjs.Bitmap("./WeChatShare.jpg");
+    shareButton.x = 100;
+    shareButton.y = 700;
+
+
+    // food
+    var foodList = [
+        new createjs.Bitmap("./油炸芒果.png"),
+        new createjs.Bitmap("./大排.png"),
+        new createjs.Bitmap("./大块肉.png"),
+        new createjs.Bitmap("./辣椒.png"),
+    ];
+
+    foodList[0].point = 5;
+    foodList[1].point = 3;
+    foodList[2].point = 2;
+    foodList[3].point = -2;
+
+    // refresh function
+    refreshPointDisplay = function() {
+        totalPointDisplay.text = "总得分: " + totalPoint;
+    };
+    refreshTime = function() {
+        timeDisplay.text = ~~(timeTotal / 1000);
+    };
+
+
+    goToPre();
+
+
+    // game loop
+    var nextFood = 0;
+    createjs.Ticker.addEventListener("tick", function () {
+        if (state === "menu") {
+
+            // pass
+        }
+        if (state === "playing") {
+            // move && remove food
+            for (var i = 0; i < stage.children.length; ++i)
+                if (stage.children[i].name === "food") {
+                    if (stage.children[i].y > 1350) {
+                        stage.removeChildAt(i);
+                    }
+                    else {
+                        stage.children[i].y += stage.children[i].speed;
+                    }
+                }
+
+            // next food
+            nextFood -= 1;
+            if (nextFood < 0) {
+                nextFood = 5;
+
+                // create a food
+                ((function() {
+                    var t = ~~(Math.random() * 4.5);
+                    if (t > 3) t = 3;
+                    var foodType;
+                    var newFood = Object.create(foodList[t]);
+                    newFood.name = "food";
+                    newFood.x = 50;
+                    newFood.y = 50;
+                    newFood.speed = ((Math.random() * 40) + 20);
+                    newFood.regX = ~~(Math.random() * 500) - 500;
+                    newFood.regY = 100;
+                    var that = newFood;
+                    var click = function () {
+                        stage.removeChild(that);
+                        totalPoint += that.point;
+                        refreshPointDisplay();
+                    };
+                    newFood.addEventListener('mousedown', click);
+                    newFood.disableClick = function() {
+                        that.removeEventListener('mousedown', click);
+                    };
+                    newFood.enableClick = function() {
+                        that.addEventListener('mousedown', click);
+                    };
+
+                    // insert it to the stage
+                    stage.addChild(newFood);
+                })());
+            }
+
+            timeTotal += (new Date()).getTime() - startTime;
+
+            // finish
+            // finish time 30s
+            if (timeTotal >= 30000) {
+                goToFinish(totalPoint);
+            }
+        }
+        else if (state === "suspend") {
+
+            // pass
+        }
+        refreshTime();
+        startTime = (new Date()).getTime();
+        stage.update();
+    });
+</script>
+<script type="text/javascript">
+    function gameover_callback(){
+        window.WXListener();
+    }
+
+</script>
+<script type="text/javascript" src="/plugins/jquery.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="./scripts/main.js?v=1"></script>
+
+<!-- 统计 -->
+<script type="text/javascript" src="/plugins/tongji.js"></script>
+</body>
+</html>

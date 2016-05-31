@@ -1,0 +1,12 @@
+bower_components
+test/bower_components
+.DS_Store
+npm-debug.log
+.cache
+*template.js
+.tmp
+dist/
+node_modules/
+test/
+*~
+packages/*

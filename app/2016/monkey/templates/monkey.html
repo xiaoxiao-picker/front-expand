@@ -1,0 +1,43 @@
+<section class="full-page page-3 back-image" style='height: {{winHeight}}px;'>
+	<div class="inner-bg back-image">
+		<div class="avatar-box back-image">
+			<img class="avatar" src="./images/{{monkey.avatar}}" border="none" />
+		</div>
+		<h3 class="monkey-name">
+		{{monkey.name}}
+		</h3>
+		<div class="monkey-desc">
+			<p>
+				根据<span class="name">{{firstName}}</span>和<span class="name">{{secondName}}</span>的别样气质，你们生了一只<span class="name">{{monkey.name}}</span>。
+			</p>
+			<p>
+				{{monkey.desc}}
+			</p>
+		</div>
+	</div>
+	
+	<div class="bottom-box back-image">
+		<div class="buttons">
+			{{if share}}
+			<a class="btn btn-restart" href="./index.html">
+				<img src="./images/replay.png" />
+			</a>
+			{{else}}
+			<button id="btnShare" class="btn btn-share">
+				<img src="./images/btn-share.png" />
+			</button>
+			<a id="btnAgain" class="btn btn-again" href="./index.html">
+				<img src="./images/btn-again.png" />
+			</a>
+			{{/if}}
+		</div>
+		<div class="message">
+			<p>本游戏由<span>高校微信第三方 校校</span>提供</p>
+			<p><span>www.xiaoxiao.la</span></p>
+		</div>
+	</div>
+
+	<div class="share-box">
+		<img src="./images/share.png" />
+	</div>
+</section>

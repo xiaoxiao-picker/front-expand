@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>圣诞比拼</title>
+		<meta name="viewport" content="width=device-width,user-scalable=no">
+		<link rel="stylesheet" href="./styles/index.css?v=1" type="text/css">
+		<link rel="stylesheet" type="text/css" href="/styles/main.css">
+		<link rel="stylesheet" type="text/css" href="/assets/stylesheets/iconfont.css" />
+	</head>
+	<body class="christmas-body">
+		<img class="header-img" src="./images/header-bg.jpg">
+		<div class="link-box clearfix">
+			<a class="link-rule" href="javascript:void(0);">查看活动规则</a>
+		</div>
+		<div class="map-box">
+			<div id="ChinaMap"></div>
+			<!-- <div class="tip">
+				清华大学 12432
+			</div> -->
+		</div>
+		<ul class="options-box"></ul>
+		<div id="ModalContainer" class="modal-container">
+			<div class="detail-box">
+				<a href="javascript:void(0);" class="btn-close">
+					<span class="iconfont icon-close-circle"></span>
+				</a>
+				<div class="box-header">
+					<h4>活动规则</h4>
+				</div>
+				<div class="box-content">
+					<div>
+						<h4>【比拼时间】</h4>
+						<p>12月25日 - 12月27日</p>
+					</div>
+					<div>
+						<h4>【奖品发放】</h4>
+						<p>12月28日由校校联系获奖者并发放</p>
+					</div>
+					<div>
+						<h4>【参与对象】</h4>
+						<p>由校校选中的20所高校及20所高校学生</p>
+					</div>
+					<div>
+						<h4>【参与方式】</h4>
+						<p>参与的学校学生可点击自己学校，在页面中进行圣诞照片上或对他人上传的照片进行点赞</p>
+					</div>
+					<div>
+						<h4>【活动奖品】</h4>
+						<table class="center">
+							<thead>
+								<tr>
+									<th style="width: 20%;">奖品对象</th>
+									<th style="width: 20%;">获奖名称</th>
+									<th style="width: 15%;">数量</th>
+									<th style="width: 15%;">奖品</th>
+									<th>说明</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>学校</td>
+									<td>最佳人气奖</td>
+									<td>1名</td>
+									<td>5000元</td>
+									<td>总赞数最高的学校</td>
+								</tr>
+								<tr>
+									<td>学校</td>
+									<td>最具活力奖</td>
+									<td>3名</td>
+									<td>3000元</td>
+									<td>参与发照片最多的前三学校。不和最佳人气重叠</td>
+								</tr>
+								<tr>
+									<td>学校</td>
+									<td>普天同庆奖</td>
+									<td>20名</td>
+									<td>500元</td>
+									<td>发照片超过200组，此奖不与前两者重叠</td>
+								</tr>
+								<tr>
+									<td>学校</td>
+									<td>最最和谐奖</td>
+									<td>1名</td>
+									<td>1000元</td>
+									<td>发照片男女比例1:1的。可与前三者重叠</td>
+								</tr>
+								<tr>
+									<td>个人</td>
+									<td>圣诞人气奖</td>
+									<td>20名</td>
+									<td>500元</td>
+									<td>境内任意经济舱机票一张</td>
+								</tr>
+								<tr>
+									<td>个人</td>
+									<td>人气二等奖</td>
+									<td>20名</td>
+									<td>200元</td>
+									<td>每个学校的第二名，200元话费</td>
+								</tr>
+								<tr>
+									<td>个人</td>
+									<td>人气三等奖</td>
+									<td>20名</td>
+									<td>100元</td>
+									<td>每个学校的第二名，100元话费</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+		<!-- build:js({app,.tmp,.}) /scripts/vendor.christmas.js -->
+		<script type="text/javascript" src="/bower_components/modernizr/modernizr.js"></script>
+		<script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+
+		<script type="text/javascript" src="/plugins/svgmap/js/lib/raphael-min.js"></script>
+		<script type="text/javascript" src="/plugins/svgmap/js/res/chinaMapConfig.js"></script>
+		<script type="text/javascript" src="/plugins/svgmap/js/map.js"></script>
+
+		<script type="text/javascript" src="/bower_components/seajs/dist/sea.js"></script>
+		<script type="text/javascript" src="/bower_components/seajs-css/dist/seajs-css.js"></script>
+		<script type="text/javascript" src="/bower_components/store/store.js"></script>
+		<script type="text/javascript" src="/plugins/hashchange.js"></script>
+		<script type="text/javascript" src="/scripts/seajs-config.js"></script>
+		<!-- endbuild -->
+
+
+		<script type="text/javascript" src="/scripts/base.js"></script>
+		<script type="text/javascript">
+			seajs.use('factory.application', function(application) {
+				window.Application = application;
+				application.init(function(){
+					seajs.use("./scripts/index.js");
+				});
+			});
+		</script>
+		
+		
+		<!-- 统计 -->
+		<script type="text/javascript" src="/plugins/tongji.js"></script>
+	</body>
+</html>

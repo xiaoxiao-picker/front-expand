@@ -1,0 +1,234 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0" />
+    <title>决胜！光华之巅</title>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <link rel="stylesheet" href="css/swiper.css">
+    <style type="text/css">
+        *{
+            font-family:"Microsoft YaHei", "微软雅黑";
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .swiper-slide table {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            color: black;
+            font-size: 18px;
+        }
+
+        .absolute_middle {
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+
+        table {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+        .text1{
+            font-size:18px;
+        }
+        .text2{
+            font-size:24px;
+        }
+        @media screen and (max-height: 570px) {
+                .text1{
+                    font-size:17px;
+                }
+                .text2{
+                    font-size:22px;
+                }
+        }
+        @media screen and (max-height: 500px) {
+                .text1{
+                    font-size:16px;
+                }
+                .text2{
+                    font-size:20px;
+                }
+        }
+    </style>
+</head>
+<body>
+    <div id="gamecon" style="width:100%;height:100%;position:relative;">
+        <img src="images/gamebg2.png" style="position:absolute;left:19%;top:22.8%;width:62%;height:36.5%;" />
+        <img src="images/man.png" style="position:absolute;left:50%;top:43%;height:30%;" class="absolute_middle" />
+        <img id="doorleft" src="images/door.jpg" style="position:absolute;right:50%;top:22.8%;width:30.5%;height:36.5%;" />
+        <img id="doorright" src="images/door.jpg" style="position: absolute; left: 50%; top: 22.8%; width: 30.5%; height: 36.5%;" />
+        <img src="images/gamebg.png" style="position:absolute;left:0;bottom:0;width:100%;height:100%;" />
+        <img id="titlebg" src="images/bg.jpg" style="position:absolute;left:0;top:0;width:100%;height:100%;" />
+        <div id="level" style="position:absolute;height: 8%; width: 40%; opacity: 0; left: 30%; top:12%;font-size: 34px;">
+            <img src="images/level.png" style="width:100%;height:100%;" />
+            <div class="swiper-container" style="width:100%;height:100%;position:absolute;left:0;top:0;">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><table><tr><td>1</td></tr></table></div>
+                    <div class="swiper-slide"><table><tr><td>2</td></tr></table></div>
+                    <div class="swiper-slide"><table><tr><td>3</td></tr></table></div>
+                    <div class="swiper-slide"><table><tr><td>4</td></tr></table></div>
+                    <div class="swiper-slide"><table><tr><td>5</td></tr></table></div>
+                    <div class="swiper-slide"><table><tr><td>6</td></tr></table></div>
+                    <div class="swiper-slide"><table><tr><td>7</td></tr></table></div>
+                    <div class="swiper-slide"><table><tr><td>8</td></tr></table></div>
+                </div>
+            </div>
+        </div>
+        <div id="title_con" style="position:absolute;left:0;top:8%;background-color:rgba(0,0,0,0.6);color:white;width:84%;height:84%;padding:0 8% 0 8%;font-size:14px;display:none;">
+            <div style="width:100%;height:10%;"></div>
+            <div style="text-align:center;font-size:30px;">决胜！光华之巅</div>
+            <div style="width:100%;height:1%;"></div>
+            <!-- <p>Hello everybody！</p> -->
+            <p class="text1" style="">复旦光华楼，得名于“日月光华，旦复旦兮”。总高142米，地上30层，地下2层，被誉为“中国高校第一楼”。其楼之高，其风之猛，都是我旦学子引以为傲之处。校友们纷纷表示，校庆日必做之事，就是登上光华楼顶，俯瞰魔都。</p>
+            
+            <div style="width:100%;height:3%;"></div>
+            <div class="text2" style="">
+                通过回答有趣的校史题登上30F光华楼顶，答对将上升5层，答错将下降2层哦！
+            </div>
+            <img onclick="entergame();" src="images/close.png" style="position:absolute;height:6%;right:3%;top:3%;" />
+        </div>
+        <img id="startbutton" onclick="showrule();" src="images/start.png" style="position:absolute;height:10%;left:50%;bottom:0%; " class="absolute_middle" />
+    </div>
+    <div id="question_con" style="position:absolute;left:0;top:20%;display:none;background-color:rgba(0,0,0,0.6);color:white;width:84%;height:60%;padding:0 8% 0 8%;font-size:20px;">
+        <div style="width:100%;height:5%;"></div>
+        <div class="questiontext" style="width:100%;height:40%;">
+            随便来点什么吧
+        </div>
+        <div style="width:100%;height:45%;">
+            <div class="answertext1" onclick="confirmanswer(1);" style="display:inline-block;vertical-align:top;width:45%;height:50%;">A.asdf</div>
+            <div class="answertext2" onclick="confirmanswer(2);" style="display:inline-block;vertical-align:top;width:45%;height:50%;">A.asdf</div>
+            <div class="answertext3" onclick="confirmanswer(3);" style="display:inline-block;vertical-align:top;width:45%;height:50%;">A.asdf</div>
+            <div class="answertext4" onclick="confirmanswer(4);" style="display:inline-block;vertical-align:top;width:45%;height:50%;">A.asdf</div>
+        </div>
+    </div>
+    <div id="result_con" style="position:absolute;left:0;top:0;width:100%;height:100%;display:none;">
+        <img src="images/result2.png" style="width:100%;height:100%;" />
+        <div style="position:absolute;top:48%;left:50%;width:88%;" class="absolute_middle">
+            <img src="images/result.png?v=1" style="width:100%;" />
+            <div style="position:absolute;left:0;top:0;height:100%;width:100%;text-align:left;color:white;font-size:30px;">
+                <div id="rank" style="position: absolute; left: 5%; width: 90%; top: 30%;">
+                    <table><tr><td>成　绩：F</td></tr></table>
+                </div>
+                <div id="wrongnum" style="position:absolute;left:5%;width:90%;top:43%;">
+                    <table><tr><td>共计答错20题</td></tr></table>
+                </div>
+                <img onclick="entergame();" src="images/restart.png" style="position:absolute;left:50%;height:13%;top:65%;" class="absolute_middle" />
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var questions = [
+                    // part A
+                    ["复旦大学的校训是（）", "日月光华，旦复旦兮", "天下为公", "博学而笃志，切问而近思", "自由而无用", 3],
+                    ["复旦的创始人是（）", "孙中山", "马相伯", "李登辉", "杨玉良", 2],
+                    ["复旦的校花是（）", "白玉兰", "紫荆花", "海棠花", "石楠花", 1],
+                    ["复旦第一栋女生宿舍的名字是（）", "南宫", "北宫", "东宫", "西宫", 3],
+                    ["复旦大学校歌作词者是（ ）", "刘大白", "丰子恺", "李登辉", "孙寒冰", 1],
+                    ["复旦校史馆的现任镇馆之宝是（ ）", "复旦大学校钟", "宣统年间卒业文凭", "1920年江湾新校奠基石", "孙中山题字条幅", 2],
+                    ["复旦大学校名的题写者是（ ）", "毛泽东", "周恩来", "邓小平", "江泽民", 1],
+                    ["复旦大学始建于（ ）", "1904年", "1905年", "1906年", "1907年", 2],
+                    ["复旦何时实现了女生入学？（ ）", "北伐运动期间", "抗日战争期间", "五四运动期间", "新中国成立后", 1],
+                    ["复旦公学第二任校长是（ ）", "李登辉", "高凤谦", "于右任", "严复", 4],
+                    ["复旦大学主体在抗战期间搬迁去了（ ）", "浙江嘉兴", "重庆北碚", "江苏南京", "陕西西安", 2],
+                    ["复旦大学任职时间最长的校长是（ ）", "马相伯", "苏步青", "李登辉", "谢希德", 3],
+                    ["“复旦”两个字出自哪本经典？（ ）", "论语", "孟子", "诗经", "尚书大传", 4],
+                    ["复旦大学何时改名为“国立复旦大学”的？（ ）", "1942.1.1", "1945.7.23", "1947.8.18", "1949.10.1", 1],
+                    ["江湾奠基石原件现在在哪里？（ ）", "燕园", "曦园", "校史馆", "老校门", 1],
+                    ["1929年9月，按照《大学组织法》改组，复旦设立了四个学院，分别是（ ）", "文理商农", "法商农工", "文理法商", "文理工商", 3],
+                    ["李登辉抗战期间提出的“复旦精神”的概念是（ ）", "进取，顽强，团结", "顽强，坚毅，进取", "牺牲、团结、服务", "自由，平等，团结", 3],
+                    ["复旦大学首次被确定为重点大学是在（）年？", "1956", "1957", "1958", "1959", 4],
+                    ["“黄山道上遇小平”是（ ）年发生的？", "1979", "1978", "1977", "1990", 1],
+                    ["复旦大学研究生院的第一任院长是（ ）", "苏步青", "陈望道", "蔡尚思", "谷超豪", 1],
+                    ["下列哪位美国总统从未来访复旦？", "奥巴马", "克林顿", "卡特", "里根", 2],
+                    ["1952年院系调整，华东地区三所综合性大学是（）", "复旦大学 南京大学 交通大学", "复旦大学 浙江大学 华东大学", "山东大学 复旦大学 南京大学", "交通大学 山东大学 华东大学", 3],
+                    ["复旦大学学子“舌战狮城”，最终夺魁。并在国内掀起了一场辩论的高潮。请问与复旦大学一起闯入决赛的队伍是（）", "剑桥大学队", "新加坡国立大学队", "悉尼大学队", "台湾大学队", 4],
+                    ["“崇尚科学、注重文艺、不谈教理”三条办学方针的提出者是（ ）", "马相伯", "李登辉", "谢希德", "苏步青", 1],
+                    ["被国外权威学者称为“东方第一几何学家”的复旦校长是（  ）", "马相伯", "李登辉", "谢希德", "苏步青", 4],
+                    ["孙中山曾为复旦题字（  ）", "日月光华，旦复旦兮", "天下为公", "博学而笃志，切问而近思", "自由而无用", 2],
+                    ["“中国合作运动的导师”是谁？", "薛先舟", "章益", "陈望道", "郭任远", 1],
+                    ["1949年帮助复旦得以完整的留在大陆的校长是谁？", "薛先舟", "章益", "陈望道", "谢希德", 2],
+                    ["陈望道与鲁迅是左翼文化运动的亲密战友。鲁迅先生受邀曾几次来过复旦演讲？", "1次", "2次", "3次", "4次", 2],
+                    ["复旦土木工程系的创办人是（）", "郭任远", "谈佳桢", "金通尹", "茅以升", 3],
+                    ["复旦大学参加东京审判的法学家是（ ）", "蒋学模", "张志让", "孙寒冰", "梅汝璈", 4],
+                    ["复旦大学现任校长许宁生原是哪所大学的校长？", "上海交通大学", "中山大学", "浙江大学", "南京大学", 2],
+
+                    // part B
+                    ["估计一下我旦光华楼的造价为？", "五百五十万", "五千五百万", "五亿五千万", "五十五亿", 3],
+                    ["光华楼中有一枚逼格甚高的去处——星空咖啡厅，请问星空咖啡厅在几楼？", "5F", "10F", "15F", "30F", 3],
+                    ["复旦大学校歌歌词中出现了多少个“旦”字？（ ）", "20", "24", "28", "32", 3],
+                    ["复旦大学北区食堂的神菜是（）", "黄焖鸡米饭", "油炸芒果", "红烧肉", "辣条炒饭", 4],
+                    ["《最强大脑》主持人蒋昌建在复旦教的课是（ ）", "社会学导论", "哲学导论", "比较政治学导论", "国际关系导论", 4],
+                    ["每学期的百团大战安排在？ ", "本部排球场", "正大体育馆", "南区体育场", "光华楼地下车库", 1],
+                    ["复旦人最喜欢黑的友校是（ ）", "清华大学", "北京大学", "浙江大学", "西南某高校", 4],
+                    ["光华楼周围的气候异象被称为？", "光华季风", "光华妖风", "光华抽风", "光华雷锋", 2],
+                    // ["以下哪个不是复旦的公众号？", "复旦脱单平台", "洋葱复旦", "团团在复旦", "玩转大学", 4],
+                    ["光华楼的施工建筑队是？", "清华大学", "同济大学", "上海交通大学", "浙江大学", 1],
+                    ["从复旦毕业的本科生最多必须要修读多少学分？", "132", "148.5", "152", "238.5", 4],
+                    // ["东区浴室的开放时间是？（）", "15：00", "15：30", "16：00", "16：30", 2],
+                    ["按照现行的刷锻规定来计算，排除一切抵锻情况，每个复旦大学学生四年内应当刷多少次早锻？", "40", "44", "48", "52", 3],
+                    // ["旦苑食堂三层从下到上的特点是？", "越来越贵", "排队人越来越多", "越来越难吃", "漂亮大妈越来越多", 1],
+                    ["旦苑早餐鸡蛋饼的价格是（）", "2.5元", "3元", "3.5元", "4.0元", 3],
+                    ["复旦的留学生集中居住在（）", "东区", "南区", "北区", "本部", 3],
+                    // ["以下哪个人物不属于复旦北区三宝？", "胡子叔叔", "宿管大妈", "喇嘛哥哥", "喇嘛哥哥", 2],
+                    ["复旦现在大约有多少个本科生社团？", "100个", "150个", "200个", "250个", 3],
+                    ["复旦东区/南区/本部刷一次卡洗澡能洗多长时间？", "5分钟", "8分钟", "12分钟", "20分钟", 3],
+                    ["众所周知，李达三楼和叶耀珍楼隔着一条马路，那么两位的关系是怎样的呢？", "挚友", "夫妻", "父女", "陌生人", 2],
+                    ["管理学院有一栋楼，它的名字是？", "李达一楼", "李达二楼", "李达三楼", "李达四楼", 3],
+
+                    // part C
+                    ["复旦校色为（ ）", "红色", "绿色", "黑色", "蓝色", 4],
+                    ["复旦商科的开拓者为（ ）", "李权时", "李登辉", "郭任远", "童第周", 1],
+                    ["“崇尚科学、注重文艺、不谈教理”三条办学方针提出者为（ ）", "马相伯", "李登辉", "谢希德", "颜福庆", 1],
+                    ["复旦的校训出典自（）", "孟子", "论语", "尚书", "诗经", 2],
+                    ["全面抗战爆发后，复旦与以下哪一所学校组成了临时联合大学：", "大同", "光华", "大夏", "大华", 3],
+                    ["我国第一本文摘类杂志《文摘》的主编为：", "王德邦", "孙寒冰", "孙中山", "李大钊", 2],
+                    ["上海医科大学（今复旦大学医学院）创始人为：", "颜福庆", "谢希德", "朱恒璧", "杨雄里", 1],
+                    ["1956年中国科学院首次颁发自然科学成果奖，复旦大学有三人获奖，以下哪位不在其列：", "苏步青", "朱子清", "李君璎", "朱维铮", 4],
+                    ["颜福庆曾获哪所高校的医学博士学位（ ）", "哈佛大学", "剑桥大学", "斯坦福大学", "耶鲁大学", 4],
+                    ["“严师出高徒，高徒出名师”是谁提出的口号（ ）", "马相伯", "陈望道", "苏步青", "钱新之", 3],
+                    ["1978年8月，复旦大学学生寝室的墙报栏里刊登了中文系学生小说《伤痕》，并由此开启了伤痕文学的潮流。请问《伤痕》的作者是：", "陈可雄", "李辉", "卢新华", "张胜友", 3],
+                    ["我国实行学位制度后2名最早获得文科博士学位的博士为周振鹤教授与_____教授", "葛剑雄", "洪家兴", "张荫南", "童裕孙", 1],
+                    ["奕柱堂是现在的哪里（ ）", "校医院", "相辉堂", "校史馆", "北欧研究中心", 3],
+                    ["请问以下哪个书院的代表色是绿色（ ）", "志德书院", "希德书院", "克卿书院", "腾飞书院", 1],
+                    ["复旦大学开展了六个模块的通识教育，以下哪个模块的主要内容是有关哲学的？", "第一模块", "第二模块", "第四模块", "第六模块", 2],
+                    ["除期末期间，自习圣地光华楼西辅楼的关闭时间为（）", "22:00", "22:30", "23:00", "24:00", 2],
+                    ["刷早锻是每个复旦人大一大二的必修课，早锻的开始时间为（）", "6:30", "6:35", "6:40", "6:45", 4],
+                    ["入学伊始，复旦便为每位新生配备了专属学号邮箱，勤删邮件腾空间也成了复旦人的习惯。那么普通学生的学号邮箱的容量为（）", "450M", "500M", "550M", "600M", 2],
+                    ["赶校车是每个分校区复旦学子的日常生活状态，那么离本部校车站最近的建筑物为", "理科图书馆", "3教", "恒隆物理楼", "相辉堂", 1],
+                    ["以下哪位不是复旦的校友？", "竺可桢", "陈寅恪", "梅贻琦", "罗家伦", 3],
+                    ["哪一年复旦大学与上海医科大学合并？", "2000年", "2001年", "2002年", "2003年", 1],
+                    ["“复旦”校名是由谁提出的？", "马相伯", "于右任", "李登辉", "邵力子", 2],
+                    ["光华楼主楼内的桌子以什么形状为多？", "圆形", "流线型", "波浪形", "宝塔形", 1],
+                    ["光华楼一楼有一个霸气雕塑，请问这个雕塑是什么动物？", "考拉", "剑齿虎", "鹰", "凤凰", 3],
+                    ["在邯郸校区内，以下可以上机的自习教室是？", "3108", "西辅楼101", "4508", "6102", 3],
+                    ["老鸭粉丝汤遍布复旦的各个食堂，请问它的价格为？", "2元", "4元", "6元", "8元", 3],
+                    ["在非期末季，以下为现任邯郸校区的通宵教室的是：", "3101", "3105", "3108", "3109", 2],
+                    ["“愿你不再错过末班车，愿你和你深爱的人永远在一起。”这句对文艺回复是以下哪个单位的老师给出的？", "教务处", "后勤处", "武装部", "总务处", 4],
+                    ["复旦大学图书馆前身为？", "戊午阅览室", "子午阅览室", "戊未阅览室", "己午阅览室", 1],
+                    ["邯郸校区南区宿舍区内，澡堂的开放时间为？", "15:00-22:30", "15:30-22:30", "15:00-23:00", "15:30-23:00", 1]
+                ];
+
+        // eval(function (p, a, c, k, e, r) { e = function (c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) r[e(c)] = k[c] || e(c); k = [function (e) { return r[e] }]; e = function () { return '\\w+' }; c = 1 }; while (c--) if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]); return p }('13 g=1s 1w(".P-1b",{1h:"1m",1r:!0,1v:s}),E=!1,9=1,1j,e=0,l=0,r=1,w,z;o 19(){$("#1a").p();$("#1f").p();$("#11").J();$("#K").q("x","1")}o 1t(){9=1;l=r=e=0;E=!0;$("#11").p();$("#y").p();$("#Y").p();$("#K").q("x","1");s()}o X(){F>9&&W>=e?(l=V.1c(V.1d()*m.M)%m.M,$(".1i").d("\\S\\1n:"+m[l][0]),$(".1o").d("A."+m[l][1]),$(".1p").d("B."+m[l][2]),$(".1E").d("C."+m[l][3]),$(".1u").d("D."+m[l][4]),$("#y").J()):T()}o 15(b){r=b;$("#y").p();$("#w").t({I:"u%"},v);$("#z").t({L:"u%"},v);1e(N,1g)}o N(){r!=m[l][5]?(e+=1,1<=9-2?(g.n(g.O-2),9-=2):1!=9?(g.n(0),9=1):s()):F>=9+5?(g.n(g.O+5),9+=5):(g.n(7),9=F)}o s(){1k(13 b=$(".P-1l"),c=9,c=3<=9&&Q>=9?9-2:3>9?1:R,a=0;8>a;a++)$(b[a]).1q("f").d(c+a);3<=9&&Q>=9?g.n(2,0,!1):3>9?g.n(9-1,0,!1):g.n(9-R,0,!1);$("#w").q("I","u%").t({I:"U%"},v,X);$("#z").q("L","u%").t({L:"U%"},v)}o T(){E=!1;4>=e?$("#i f").d("\\h\\k\\j\\Z"):6>=e?$("#i f").d("\\h\\k\\j\\Z-"):8>=e?$("#i f").d("\\h\\k\\j\\H+"):10>=e?$("#i f").d("\\h\\k\\j\\H"):12>=e?$("#i f").d("\\h\\k\\j\\H-"):14>=e?$("#i f").d("\\h\\k\\j\\G+"):16>=e?$("#i f ").d("\\h\\k\\j\\G"):18>=e?$("#i f").d("\\h\\k\\j\\G-"):W>=e?$("#i f").d("\\h\\k\\j\\1x"):$("#i f").d("\\h\\k\\j\\1y");$("#1z f").d("\\1A\\1B\\1C\\1D"+e+"\\S");$("#K").q("x","0");17();$("#Y").J()};', 62, 103, '|||||||||nowlevel||||html|nowwrong|td|mySwiper|u6210|rank|u7ee9|u3000|nowquestion|questions|swipeTo|function|hide|css|nowanswer|formnewlevel|animate|50|700|doorleft|opacity|question_con|doorright|||||isGaming|30|uff1aC|uff1aB|right|show|level|left|length|checkanswer|activeIndex|swiper|25|23|u9898|gameover|80|Math|20|showquestion|result_con|uff1aA||title_con||var||confirmanswer||gameover_callback||showrule|startbutton|container|floor|random|setTimeout|titlebg|750|mode|questiontext|nowleveltext|for|slide|vertical|u76ee|answertext1|answertext2|find|onlyExternal|new|entergame|answertext4|onSlideChangeEnd|Swiper|uff1aD|uff1aF|wrongnum|u5171|u8ba1|u7b54|u9519|answertext3'.split('|'), 0, {}))
+
+        function gameover_callback() {
+            //nowlevel,nowwrong
+            WXListener&&WXListener();
+        }
+    </script>
+    <script type="text/javascript" src="js/ordinary.js?v=3"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="js/main.js?v=3"></script>
+
+    <!-- 统计 -->
+    <script type="text/javascript" src="/plugins/tongji.js"></script>
+</body>
+</html>

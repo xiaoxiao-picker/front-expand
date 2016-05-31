@@ -1,0 +1,37 @@
+body {
+        margin: 0;
+}
+
+.header-img {
+        width: 100%;
+}
+
+.area-container {
+        padding: 20px 15px;
+}
+
+.area-container .area-box {
+        background-color: #ffbf00;
+        border-radius: 5px;
+        margin-bottom: 20px;
+}
+
+.area-container .area-box > a {
+        display: block;
+        height: 100%;
+        padding: 15px;
+        color: #fff;
+        text-decoration: none;
+        outline: none;
+        font-size: 20px;
+        overflow: hidden;
+}
+
+.area-container .area-box > a .arrow-img {
+        float: right;
+        height: 25px;
+}
+
+#cnzz_stat_icon_1254929763 {
+        display: none;
+}
